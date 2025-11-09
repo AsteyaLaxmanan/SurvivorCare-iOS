@@ -573,9 +573,11 @@ struct ContentView: View {
                                 Text("What gets collected?").btSubtitle()
                             }
                         } content: {
-                            Text("Steps, distance, active/basal energy, flights, exercise minutes, and latest heart rate. Data is saved locally as JSON for your report.")
-                                .foregroundStyle(Color.btMuted)
-                                .font(.subheadline)
+                            Text("""
+                            Steps, distance, flights, active/basal energy, and exercise minutes; plus cardio (latest HR, resting HR, walking HR average, HRV/SDNN, VO₂ max), oxygen saturation, body weight and blood pressure, and a brief sleep summary. All data stays on-device and is saved as JSON for your report.
+                            """)
+                            .foregroundStyle(Color.btMuted)
+                            .font(.subheadline)
                         }
 
                         Text(statusMessage)
@@ -789,11 +791,14 @@ struct ContentView: View {
 
     @MainActor
     private func beginCheckInTapped() {
+        print("[BioTwin] Begin tapped")
         statusMessage = "Starting check-in…"
-        // Watchdog hint if the Health permission sheet never appears/returns
+
+        // (No journal.startNewSession() here anymore)
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
             if stage == .landing || stage == .authorizing {
-                statusMessage = "Still waiting on Health permissions… If you didn’t see a sheet, check Settings ▸ Health ▸ Apps ▸ SurvivorCare."
+                statusMessage = "Still waiting on Health permissions… If you didn’t see a sheet, check Settings ▸ Health ▸ Apps ▸ BioTwin."
             }
         }
         startCheckIn()
