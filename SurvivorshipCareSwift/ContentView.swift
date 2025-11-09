@@ -540,7 +540,7 @@ struct ContentView: View {
                             endPoint: .bottomTrailing
                         )
                         VStack(spacing: 10) {
-                            Text("BioTwin").btTitle().foregroundStyle(.white)
+                            Text("SurvivorCare").btTitle().foregroundStyle(.white)
                             Text("Personalized daily check-ins powered by HealthKit.")
                                 .multilineTextAlignment(.center)
                                 .foregroundStyle(.white.opacity(0.9))
@@ -747,9 +747,40 @@ struct ContentView: View {
                 MetricRow(label: "Flights Climbed", value: format(summary.flights, suffix: ""))
                 MetricRow(label: "Exercise Minutes", value: format(summary.exerciseMinutes, suffix: ""))
             }
+
             GroupBox("Cardio") {
                 MetricRow(label: "Latest HR",
                           value: summary.heartRate.isNaN ? "—" : String(format: "%.0f bpm", summary.heartRate))
+                MetricRow(label: "Resting HR",
+                          value: summary.restingHR.map { String(format: "%.0f bpm", $0) } ?? "—")
+                MetricRow(label: "HRV (SDNN)",
+                          value: summary.hrvSDNNms.map { String(format: "%.0f ms", $0) } ?? "—")
+                MetricRow(label: "VO₂ Max",
+                          value: summary.vo2Max.map { String(format: "%.1f ml/kg·min", $0) } ?? "—")
+                MetricRow(label: "Walking HR Avg",
+                          value: summary.walkingHRAvgBPM.map { String(format: "%.0f bpm", $0) } ?? "—")
+                MetricRow(label: "Workout HR (avg today)",
+                          value: summary.workoutAvgHRToday.map { String(format: "%.0f bpm", $0) } ?? "—")
+                MetricRow(label: "Workout HR (max today)",
+                          value: summary.workoutMaxHRToday.map { String(format: "%.0f bpm", $0) } ?? "—")
+            }
+
+            GroupBox("Respiratory") {
+                MetricRow(label: "O₂ Saturation",
+                          value: summary.oxygenSatPct.map { String(format: "%.0f%%", $0) } ?? "—")
+            }
+
+//            GroupBox("Body & Vitals") {
+//                MetricRow(label: "Weight",
+//                          value: summary.bodyMassKg.map { String(format: "%.1f kg", $0) } ?? "—")
+//                MetricRow(label: "Blood Pressure",
+//                          value: (summary.systolicBP != nil && summary.diastolicBP != nil)
+//                            ? String(format: "%.0f/%.0f mmHg", summary.systolicBP!, summary.diastolicBP!)
+//                            : "—")
+//            }
+            GroupBox("Sleep") {
+                MetricRow(label: "Summary",
+                          value: "5.46 h last night")
             }
         }
     }
@@ -762,7 +793,7 @@ struct ContentView: View {
         // Watchdog hint if the Health permission sheet never appears/returns
         DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
             if stage == .landing || stage == .authorizing {
-                statusMessage = "Still waiting on Health permissions… If you didn’t see a sheet, check Settings ▸ Health ▸ Apps ▸ BioTwin."
+                statusMessage = "Still waiting on Health permissions… If you didn’t see a sheet, check Settings ▸ Health ▸ Apps ▸ SurvivorCare."
             }
         }
         startCheckIn()
