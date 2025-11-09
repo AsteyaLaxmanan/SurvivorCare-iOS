@@ -137,6 +137,9 @@ struct CognitiveFlowView: View {
     let onGenerate: (_ memory: MemoryMetrics, _ attention: AttentionMetrics,
                      _ scores: CognitiveScores, _ meta: CognitiveSessionMeta) -> Void
 
+    // New: to pop back after tapping Generate
+    @Environment(\.dismiss) private var dismiss
+
     // Flow state (kept as String to avoid touching your other code)
     @State private var phase: String = "intro"
     @State private var memoryMetrics: MemoryMetrics?
@@ -216,10 +219,12 @@ struct CognitiveFlowView: View {
                                     .foregroundStyle(.secondary)
                             }
 
-                            // Primary CTA – Generate now
+                            // Primary CTA – Generate now and return
                             Button {
-                                onDone(mem, att, s, meta)   // persist JSON
-                                onGenerate(mem, att, s, meta)
+                                onDone(mem, att, s, meta)      // persist JSON
+                                onGenerate(mem, att, s, meta)  // parent starts generation
+                                // pop back to Daily Check-in
+                                DispatchQueue.main.async { dismiss() }
                             } label: {
                                 Text("Generate Report")
                                     .bold()
@@ -229,27 +234,30 @@ struct CognitiveFlowView: View {
                             .tint(.btAccent)
                             .padding(.top, 8)
 
-                            // Secondary – Save & return
+                            // Secondary – Save & return (no generation)
                             Button("Save & Return") {
                                 onDone(mem, att, s, meta)
+                                DispatchQueue.main.async { dismiss() }
                             }
                             .buttonStyle(.bordered)
                         }
                     }
                 }
-                .fullWidthCard() // nice card container for each phase
+                .fullWidthCard()
             }
             .padding(.horizontal, 16)
             .padding(.top, 12)
-            .frame(maxWidth: .infinity, alignment: .topLeading) // pin to top
+            .frame(maxWidth: .infinity, alignment: .topLeading)
         }
         .navigationTitle("Cognitive Test")
-        .navigationBarTitleDisplayMode(.inline)                 // remove large-title gap
+        .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarBackground(Color(.systemBackground), for: .navigationBar)
         .background(Color(.systemBackground).ignoresSafeArea())
     }
 }
+
+// --- StepHeader / StepTag / fullWidthCard / IntroCard unchanged ---
 
 // MARK: - Header (chips + progress)
 private struct StepHeader: View {
