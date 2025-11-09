@@ -30,11 +30,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		456F2C032EC03F27008A4E54 /* SurvivorshipCareSwift */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = SurvivorshipCareSwift;
-			sourceTree = "<group>";
-		};
 		456F2C112EC03F28008A4E54 /* SurvivorshipCareSwiftTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = SurvivorshipCareSwiftTests;
@@ -43,6 +38,11 @@
 		456F2C1B2EC03F28008A4E54 /* SurvivorshipCareSwiftUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = SurvivorshipCareSwiftUITests;
+			sourceTree = "<group>";
+		};
+		45EE350F2EC059BB009955E9 /* SurvivorshipCareSwift */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SurvivorshipCareSwift;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,7 +75,7 @@
 		456F2BF82EC03F27008A4E54 = {
 			isa = PBXGroup;
 			children = (
-				456F2C032EC03F27008A4E54 /* SurvivorshipCareSwift */,
+				45EE350F2EC059BB009955E9 /* SurvivorshipCareSwift */,
 				456F2C112EC03F28008A4E54 /* SurvivorshipCareSwiftTests */,
 				456F2C1B2EC03F28008A4E54 /* SurvivorshipCareSwiftUITests */,
 				456F2C022EC03F27008A4E54 /* Products */,
@@ -108,7 +108,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				456F2C032EC03F27008A4E54 /* SurvivorshipCareSwift */,
+				45EE350F2EC059BB009955E9 /* SurvivorshipCareSwift */,
 			);
 			name = SurvivorshipCareSwift;
 			packageProductDependencies = (
@@ -395,11 +395,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SurvivorshipCareSwift/SurvivorshipCareSwift.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WY6QK39672;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Read heart rate, steps, distance, and energy metrics for survivorship tracking.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Write workouts or energy samples from the app.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -427,11 +430,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SurvivorshipCareSwift/SurvivorshipCareSwift.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WY6QK39672;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Read heart rate, steps, distance, and energy metrics for survivorship tracking.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Write workouts or energy samples from the app.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
